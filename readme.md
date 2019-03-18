@@ -1,5 +1,3 @@
-# :warning: Deprecation Notice :warning:
-
 # stork [![Build Status](https://travis-ci.org/mapbox/stork.svg?branch=master)](https://travis-ci.org/mapbox/stork)
 
 <img src='./assets/stork.png' width=75%>
