@@ -591,7 +591,6 @@ stork.forwarder = (event, context, callback) => {
 stork.gatekeeper = (event, context, callback) => {
   if (!event.repoId)
     return callback(new Error('repoId not specified'));
-    console.log(`installationId ${installationId}`);
   stork.decrypt(process.env)
     .then(() => {
       const token = process.env.GITHUB_ACCESS_TOKEN;
@@ -606,7 +605,7 @@ stork.gatekeeper = (event, context, callback) => {
           Accept: 'application/vnd.github.machine-man-preview+json'
         }
       };
-
+      console.log(`installationId ${installationId}`);
       const uri = `https://api.github.com/user/installations/${installationId}/repositories/${event.repoId}`;
 
       return got.put(`${uri}?${querystring.stringify(query)}`, config);
