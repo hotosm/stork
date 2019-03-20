@@ -49,6 +49,8 @@ const githubToken = (appId, installationId, privateKey) => {
       };
 
       const uri = `https://api.github.com/app/installations/${installationId}/access_tokens`;
+
+      console.log(`config ${config}`);
       return got.get('https://api.github.com/app', config)
         .then(() => got.post(uri, config));
     })
@@ -589,7 +591,7 @@ stork.forwarder = (event, context, callback) => {
 stork.gatekeeper = (event, context, callback) => {
   if (!event.repoId)
     return callback(new Error('repoId not specified'));
-
+    console.log(`installationId ${installationId}`);
   stork.decrypt(process.env)
     .then(() => {
       const token = process.env.GITHUB_ACCESS_TOKEN;
