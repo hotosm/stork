@@ -28,7 +28,7 @@ To create a new Github App:
 3. Provide the app with the following permissions:
   - **Commit statuses**: Read & write
   - **Repository contents**: Read-only
-4. Under the "Repository contents" section, check the box for "Push".
+4. Under the "Repository events" section, check the box for "Push".
 5. Generate a private key for the app, and save it to a file locally.
 6. Record the new Github App's ID, which is visible on the App listing page.
 7. Next, create an installation of the app in you organization's account. Simply provide a list of repositories in your account that stork will watch. This list can easily have other repositories added to it later.
