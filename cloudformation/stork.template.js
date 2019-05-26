@@ -9,7 +9,6 @@ const Parameters = {
   GithubAppInstallationId: { Type: 'String', Description: 'The installation ID of your Github app' },
   GithubAppPrivateKey: { Type: 'String', Description: '[secure] A private key for your Github app' },
   GithubAccessToken: { Type: 'String', Description: '[secure] A personal access token that can update Github Apps' },
-  NpmAccessToken: { Type: 'String', Description: '[secure] An NPM access token with access to private modules' },
   OutputBucketPrefix: { Type: 'String', Description: 'Prefix of bucket name that will house bundles' },
   OutputBucketRegions: { Type: 'String', Description: 'Regions used as bucket name suffixes' },
   OutputKeyPrefix: { Type: 'String', Description: 'Key prefix within the bucket for bundles' },
@@ -64,11 +63,6 @@ const Resources = {
                   'ecr:BatchCheckLayerAvailability'
                 ],
                 Resource: '*'
-              },
-              {
-                Effect: 'Allow',
-                Action: 'kms:Decrypt',
-                Resource: cf.importValue('cloudformation-kms-production')
               }
             ]
           }
@@ -123,11 +117,6 @@ const Resources = {
               },
               {
                 Effect: 'Allow',
-                Action: 'kms:Decrypt',
-                Resource: cf.importValue('cloudformation-kms-production')
-              },
-              {
-                Effect: 'Allow',
                 Action: [
                   'logs:CreateLogGroup',
                   'logs:PutRetentionPolicy'
@@ -159,7 +148,6 @@ const Resources = {
           GITHUB_APP_ID: cf.ref('GithubAppId'),
           GITHUB_APP_INSTALLATION_ID: cf.ref('GithubAppInstallationId'),
           GITHUB_APP_PRIVATE_KEY: cf.ref('GithubAppPrivateKey'),
-          NPM_ACCESS_TOKEN: cf.ref('NpmAccessToken'),
           AWS_ACCOUNT_ID: cf.accountId,
           S3_BUCKET: cf.sub('${OutputBucketPrefix}-${AWS::Region}'),
           S3_PREFIX: cf.ref('OutputKeyPrefix'),
@@ -213,11 +201,6 @@ const Resources = {
                 Effect: 'Allow',
                 Action: 'codebuild:BatchGetBuilds',
                 Resource: '*'
-              },
-              {
-                Effect: 'Allow',
-                Action: 'kms:Decrypt',
-                Resource: cf.importValue('cloudformation-kms-production')
               }
             ]
           }
@@ -404,11 +387,6 @@ const Resources = {
                 Effect: 'Allow',
                 Action: 'logs:*',
                 Resource: cf.getAtt('GatekeeperLambdaLogs', 'Arn')
-              },
-              {
-                Effect: 'Allow',
-                Action: 'kms:Decrypt',
-                Resource: cf.importValue('cloudformation-kms-production')
               }
             ]
           }
