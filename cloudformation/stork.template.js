@@ -139,7 +139,7 @@ const Resources = {
         S3Bucket: cf.sub('${OutputBucketPrefix}-${AWS::Region}'),
         S3Key: cf.sub('${OutputKeyPrefix}/stork/${GitSha}.zip')
       },
-      Handler: 'lambda.trigger',
+      Handler: 'index.trigger',
       Runtime: 'nodejs8.10',
       Timeout: 300,
       MemorySize: 512,
@@ -225,7 +225,7 @@ const Resources = {
         S3Bucket: cf.sub('${OutputBucketPrefix}-${AWS::Region}'),
         S3Key: cf.sub('${OutputKeyPrefix}/stork/${GitSha}.zip')
       },
-      Handler: 'lambda.status',
+      Handler: 'index.status',
       Runtime: 'nodejs8.10',
       Timeout: 300,
       MemorySize: 512,
@@ -321,7 +321,7 @@ const Resources = {
       },
       Runtime: 'nodejs8.10',
       Timeout: 300,
-      Handler: 'lambda.forwarder',
+      Handler: 'index.forwarder',
       MemorySize: 128,
       Role: cf.getAtt('ForwarderLambdaRole', 'Arn'),
       Environment: {
@@ -405,7 +405,7 @@ const Resources = {
       },
       Runtime: 'nodejs8.10',
       Timeout: 300,
-      Handler: 'lambda.gatekeeper',
+      Handler: 'index.gatekeeper',
       MemorySize: 128,
       Role: cf.getAtt('GatekeeperLambdaRole', 'Arn'),
       Environment: {

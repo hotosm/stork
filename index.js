@@ -3,7 +3,7 @@
 const querystring = require('querystring');
 const AWS = require('aws-sdk');
 const got = require('got');
-
+const lambda = require('./lambda.js');
 /**
  * Add a webhook to a Github repository for a single stork region
  * @param  {Object}  options              - configuration
@@ -58,4 +58,4 @@ const setupHook = (options) => {
   });
 };
 
-module.exports = { setupHook };
+module.exports = { setupHook, trigger: lambda.trigger, status: lambda.status, forwarder: lambda.forwarder, gatekeeper: lambda.gatekeeper };
