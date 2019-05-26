@@ -114,23 +114,25 @@ const deployStack = (region, bucket) => {
   }
 
   return Promise.all(preamble).then((results) => {
+    cli.flags.regions = [cli.flags.regions]
     const gitsha = results[0];
     const template = results[1];
     const encryptedNpm = results[2];
     const encryptedGithub = results[3];
     const encryptedGithubToken = results[4];
+    console.log(gitsha, cli.flags.appId, cli.flags.installationId, privateKey, encryptedGithub, encryptedGithubToken, cli.flags.githubToken, bucket, cli.flags.bundlePrefix, cli.flags,regions)
     const params = {
       StackName: 'stork-production',
       Capabilities: ['CAPABILITY_IAM'],
       OnFailure: 'DELETE',
       Parameters: [
+        { ParameterKey: 'AlarmEmail', ParameterValue: 'sysadmin@hotosm.org' },
         { ParameterKey: 'GitSha', ParameterValue: gitsha },
-        { ParameterKey: 'NpmAccessToken', ParameterValue: encryptedNpm || cli.flags.npmToken },
-        { ParameterKey: 'GithubAppId', ParameterValue: cli.flags.appId },
-        { ParameterKey: 'GithubAppInstallationId', ParameterValue: cli.flags.installationId },
+        { ParameterKey: 'GithubAppId', ParameterValue: cli.flags.appId.toString() },
+        { ParameterKey: 'GithubAppInstallationId', ParameterValue: cli.flags.installationId.toString() },
         { ParameterKey: 'GithubAppPrivateKey', ParameterValue: encryptedGithub || privateKey },
         { ParameterKey: 'GithubAccessToken', ParameterValue: encryptedGithubToken || cli.flags.githubToken },
-        { ParameterKey: 'OutputBucketPrefix', ParameterValue: bucket },
+        { ParameterKey: 'OutputBucketPrefix', ParameterValue: cli.flags.bucketBasename },
         { ParameterKey: 'OutputKeyPrefix', ParameterValue: cli.flags.bundlePrefix },
         { ParameterKey: 'OutputBucketRegions', ParameterValue: cli.flags.regions.join(',') }
       ],
