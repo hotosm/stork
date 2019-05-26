@@ -128,6 +128,7 @@ const deployStack = (region, bucket) => {
       Parameters: [
         { ParameterKey: 'AlarmEmail', ParameterValue: 'sysadmin@hotosm.org' },
         { ParameterKey: 'GitSha', ParameterValue: gitsha },
+        { ParameterKey: 'NpmAccessToken', ParameterValue: encryptedNpm || cli.flags.npmToken },
         { ParameterKey: 'GithubAppId', ParameterValue: cli.flags.appId.toString() },
         { ParameterKey: 'GithubAppInstallationId', ParameterValue: cli.flags.installationId.toString() },
         { ParameterKey: 'GithubAppPrivateKey', ParameterValue: encryptedGithub || privateKey },
