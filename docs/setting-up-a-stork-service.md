@@ -4,7 +4,7 @@ To use stork, you need to set up stork's CloudFormation stack in your AWS accoun
 
 - (API Gateway) A webhook URL and secret: These are how Github will notify stork that a commit has been made.
 - (Lambda) A function to trigger a CodeBuild project that bundles your libraries' code into a `.zip` file and puts it to S3.
-- (Lambda) A function to monitor the status of builds. This function is reponsible for reporting build status to Github's statuses API, which show up in your pull requests.
+- (Lambda) A function to monitor the status of builds. This function is responsible for reporting build status to Github's statuses API, which show up in your pull requests.
 - (Lambda) A function to forward bundles from a primary bucket to regional buckets.
 
 ## Bootstrapping

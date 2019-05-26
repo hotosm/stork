@@ -140,7 +140,7 @@ const Resources = {
         S3Key: cf.sub('${OutputKeyPrefix}/stork/${GitSha}.zip')
       },
       Handler: 'lambda.trigger',
-      Runtime: 'nodejs6.10',
+      Runtime: 'nodejs8.10',
       Timeout: 300,
       MemorySize: 512,
       Environment: {
@@ -226,7 +226,7 @@ const Resources = {
         S3Key: cf.sub('${OutputKeyPrefix}/stork/${GitSha}.zip')
       },
       Handler: 'lambda.status',
-      Runtime: 'nodejs6.10',
+      Runtime: 'nodejs8.10',
       Timeout: 300,
       MemorySize: 512,
       Environment: {
@@ -319,7 +319,7 @@ const Resources = {
         S3Bucket: cf.sub('${OutputBucketPrefix}-${AWS::Region}'),
         S3Key: cf.sub('${OutputKeyPrefix}/stork/${GitSha}.zip')
       },
-      Runtime: 'nodejs6.10',
+      Runtime: 'nodejs8.10',
       Timeout: 300,
       Handler: 'lambda.forwarder',
       MemorySize: 128,
@@ -403,7 +403,7 @@ const Resources = {
         S3Bucket: cf.sub('${OutputBucketPrefix}-${AWS::Region}'),
         S3Key: cf.sub('${OutputKeyPrefix}/stork/${GitSha}.zip')
       },
-      Runtime: 'nodejs6.10',
+      Runtime: 'nodejs8.10',
       Timeout: 300,
       Handler: 'lambda.gatekeeper',
       MemorySize: 128,
